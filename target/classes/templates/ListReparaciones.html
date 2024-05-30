@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de Reparaciones</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Mi Taller</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/reparaciones">Reparaciones</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/mecanicos">Mecánicos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/vehiculos">Vehículos</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin/users">Usuarios</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin/repuestos">Repuestos</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link btn btn-outline-light" href="/">Salir</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <h1 class="mb-4">Lista de Reparaciones</h1>
+  <a href="/reparaciones/new" class="btn btn-success mb-4">Agregar Nueva Reparación</a>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Nombre Cliente</th>
+      <th>Vehículo</th>
+      <th>Descripción</th>
+      <th>Mecánico</th>
+      <th>Estado</th>
+      <th>Repuestos</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reparacion : ${reparaciones}">
+      <td th:text="${reparacion.id}">ID</td>
+      <td th:text="${reparacion.fecha}">Fecha</td>
+      <td th:text="${reparacion.nombreCliente}">Nombre Cliente</td>
+      <td th:text="${reparacion.vehiculo.marca} + ' ' + ${reparacion.vehiculo.modelo}">Vehículo</td>
+      <td th:text="${reparacion.descripcion}">Descripción</td>
+      <td th:text="${reparacion.mecanico.nombres+' '+reparacion.mecanico.apellidos}">Mecánico</td>
+      <td th:text="${reparacion.estado}">Estado</td>
+      <td>
+        <ul>
+          <li th:each="repuesto : ${reparacion.repuestos}" th:text="${repuesto.nombre}">Repuesto</li>
+        </ul>
+      </td>
+      <td>
+        <a th:href="@{/reparaciones/edit/{id}(id=${reparacion.id})}" class="btn btn-primary btn-sm">Editar</a>
+        <a th:href="@{/reparaciones/delete/{id}(id=${reparacion.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

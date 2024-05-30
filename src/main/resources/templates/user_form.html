@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div class="container centercard">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 th:text="${user.id != null} ? 'Editar Usuario' : 'Nuevo Usuario'" class="text-center mb-4"></h1>
+                    <form th:action="${user.id != null} ? @{/api/users/{id}(id=${user.id})} : @{/api/users}" th:object="${user}" method="post">
+                        <input type="hidden" th:if="${user.id != null}" th:field="*{id}">
+
+                        <div class="form-group">
+                            <label for="nombres">Nombres:</label>
+                            <input type="text" id="nombres" th:field="*{nombres}" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellidos">Apellidos:</label>
+                            <input type="text" id="apellidos" th:field="*{apellidos}" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="text" id="telefono" th:field="*{telefono}" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" th:field="*{email}" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" th:field="*{password}" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rol">Rol:</label>
+                            <select id="rol" th:field="*{rol}" class="form-control">
+                                <option th:value="ADMINISTRADOR" th:text="'ADMINISTRADOR'">ADMINISTRADOR</option>
+                                <option th:value="MECANICO" th:text="'MECANICO'">MECANICO</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="/admin/users" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

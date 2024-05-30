@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecaReparaciones</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo"><strong>Meca</strong>Reparaciones</div>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/login">Login</a></li>        </ul>
+    </nav>
+</header>
+<main>
+    <section class="hero">
+        <div class="hero-information">
+            <h1>Bienvenidos a nuestro taller mecánico</h1>
+            <p>Expertos en reparación y mantenimiento de vehículos</p>
+        </div>
+        <div class="hero-img">
+            <img src="/img/taller.jpeg" alt="Vehículo en un taller mecánico">
+        </div>
+    </section>
+    <section class="content">
+        <h2>Nuestros Servicios</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="/img/reparacion.jpg" alt="Servicio 1">
+                <div class="card-info">
+                    <h3>Reparaciones</h3>
+                    <p>Reparamos todo tipo de problemas mecánicos</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/img/mantenimiento.jpg" alt="Servicio 2">
+                <div class="card-info">
+                    <h3>Mantenimiento</h3>
+                    <p>Mantenemos tu vehículo en óptimas condiciones</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/img/diagnostico.jpg" alt="Servicio 3">
+                <div class="card-info">
+                    <h3>Diagnóstico</h3>
+                    <p>Realizamos diagnósticos precisos para detectar problemas</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Tu Taller. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Repuestos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Mi Taller</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/reparaciones">Reparaciones</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/mecanicos">Mecánicos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/vehiculos">Vehículos</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin/users">Usuarios</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin/repuestos">Repuestos</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link btn btn-outline-light" href="/">Salir</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1>Lista de Repuestos</h1>
+    <a href="/repuestos/new" class="btn btn-success mb-4">Agregar Nuevo Repuesto</a>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="repuesto : ${repuestos}">
+            <td th:text="${repuesto.id}">ID</td>
+            <td th:text="${repuesto.nombre}">Nombre</td>
+            <td th:text="${repuesto.cantidad}">Cantidad</td>
+            <td th:text="${repuesto.precio}">Precio</td>
+            <td>
+                <a th:href="@{/repuestos/edit/{id}(id=${repuesto.id})}" class="btn btn-primary btn-sm">Editar</a>
+                <a th:href="@{/repuestos/delete/{id}(id=${repuesto.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

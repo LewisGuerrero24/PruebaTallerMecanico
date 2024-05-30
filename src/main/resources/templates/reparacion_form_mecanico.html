@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Formulario de Reparación</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div class="container centercard">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="text-center mb-4">Nueva Reparación</h1>
+          <form th:action="${reparacion.id != null} ? @{/reparaciones/update/mecanico/{id}(id=${reparacion.id})} : @{/reparaciones/mecanico}" th:object="${reparacion}" method="post">
+            <input type="hidden" th:if="${reparacion.id != null}" th:field="*{id}" />
+
+            <div class="form-group">
+              <label for="fecha">Fecha:</label>
+              <input type="date" id="fecha" th:field="*{fecha}" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label for="nombreCliente">Nombre Cliente:</label>
+              <input type="text" id="nombreCliente" th:field="*{nombreCliente}" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label for="vehiculo">Vehículo:</label>
+              <select id="vehiculo" name="vehiculoId" class="form-control">
+                <option th:each="vehiculo : ${vehiculos}" th:value="${vehiculo.id}" th:text="${vehiculo.marca} + ' ' + ${vehiculo.modelo}"
+                        th:selected="${reparacion.vehiculo != null} ? ${vehiculo.id == reparacion.vehiculo.id} : false">
+                  Vehículo
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="descripcion">Descripción:</label>
+              <textarea id="descripcion" th:field="*{descripcion}" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="mecanico">Mecánico:</label>
+              <select id="mecanico" name="mecanicoId" class="form-control">
+                <option th:each="mecanico : ${mecanicos}" th:value="${mecanico.id}"
+                        th:text="${mecanico.nombres+' '+mecanico.apellidos}"
+                        th:selected="${reparacion.mecanico!= null && reparacion.mecanico.id == mecanico.id}">
+                  Mecánico
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="estado">Estado:</label>
+              <input type="text" id="estado" th:field="*{estado}" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label for="repuestos">Repuestos:</label>
+              <select id="repuestos" name="repuestoIds" multiple class="form-control">
+
+                <option th:each="repuesto : ${repuestos}" th:value="${repuesto.id}" th:text="${repuesto.nombre}"
+                        th:selected="${reparacion.repuestos != null && reparacion.repuestos.contains(repuesto.id)}">
+                  Repuesto
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <a href="/reparaciones" class="btn btn-secondary">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+

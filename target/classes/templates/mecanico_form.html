@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Formulario de Mecánico</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 th:text="${mecanico.id != null} ? 'Editar Mecánico' : 'Nuevo Mecánico'" class="text-center mb-4"></h1>
+          <form th:action="${mecanico.id != null} ? @{/api/mecanicos/{id}(id=${mecanico.id})} : @{/api/mecanicos}" th:object="${mecanico}" method="post">
+            <input type="hidden" th:if="${mecanico.id != null}" th:field="*{id}" />
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" th:field="*{nombre}" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="especialidad">Especialidad:</label>
+              <input type="text" id="especialidad" th:field="*{especialidad}" class="form-control" />
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <a href="/mecanicos" class="btn btn-secondary">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
