@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,6 +21,8 @@ public class Reparacion {
 	    private String descripcion;
 	    private User mecanico;
 	    private String estado;
+
+		@DBRef
 	    private List<Repuesto> Repuestos;
 
 	public Reparacion() {

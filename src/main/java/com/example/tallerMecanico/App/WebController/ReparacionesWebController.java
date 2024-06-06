@@ -1,3 +1,8 @@
+
+
+
+
+
 package com.example.tallerMecanico.App.WebController;
 
 import com.example.tallerMecanico.App.Entity.*;
@@ -83,9 +88,9 @@ public class ReparacionesWebController {
 
     @PostMapping("/mecanico")
     public String createReparacionMecanico(@ModelAttribute("reparacion") Reparacion reparacion,
-                                   @RequestParam("mecanicoId") String mecanicoId,
-                                   @RequestParam("vehiculoId") String vehiculoId,
-                                   @RequestParam("repuestoIds") List<String> repuestoIds) {
+                                           @RequestParam("mecanicoId") String mecanicoId,
+                                           @RequestParam("vehiculoId") String vehiculoId,
+                                           @RequestParam("repuestoIds") List<String> repuestoIds) {
         Optional<User> mecanico = userRepository.findById(mecanicoId);
         Optional<Vehiculo> vehiculo = vehiculoRepository.findById(vehiculoId);
         List<Repuesto> repuestos = repuestoRepository.findAllById(repuestoIds);
@@ -160,8 +165,8 @@ public class ReparacionesWebController {
 
     @PostMapping("/update/mecanico/{id}")
     public String updateReparacionMecanico(@PathVariable String id, @ModelAttribute("reparacion") Reparacion reparacionDetails,
-                                   @RequestParam("mecanicoId") String mecanicoId, @RequestParam("vehiculoId") String vehiculoId,
-                                   @RequestParam("repuestoIds") List<String> repuestoIds) {
+                                           @RequestParam("mecanicoId") String mecanicoId, @RequestParam("vehiculoId") String vehiculoId,
+                                           @RequestParam("repuestoIds") List<String> repuestoIds) {
         Optional<Reparacion> reparacionOptional = reparacionRepository.findById(id);
         if (reparacionOptional.isPresent()) {
             Reparacion reparacionToUpdate = reparacionOptional.get();
@@ -201,3 +206,23 @@ public class ReparacionesWebController {
         return "redirect:/reparaciones/mecanico/"+reparacion.get().getMecanico().getId();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Actualizar Factura</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script>
+        function calcularTotal() {
+            var repuestos = JSON.parse(document.getElementById("repuestosData").value);
+            var idReparacion = document.getElementById("idReparacion").value;
+            var total = 0;
+
+            for (var i = 0; i < repuestos.length; i++) {
+                if (repuestos[i].reparacionId === idReparacion) {
+                    total += repuestos[i].precio * repuestos[i].cantidad;
+                }
+            }
+
+            document.getElementById("total").value = total;
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="mt-4">Actualizar Factura</h1>
+  <form th:action="@{/facturacion/update/{id}(id=${factura.id})}" th:object="${factura}" method="post">
+    <div class="form-group">
+      <label for="idReparacion">ID Reparación:</label>
+      <select id="idReparacion" name="idReparacion" class="form-control" onchange="calcularTotal()">
+        <option th:each="reparacion : ${reparaciones}" th:value="${reparacion.id}" th:text="${reparacion.id}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="total">Total:</label>
+      <input type="text" id="total" th:field="*{total}" class="form-control" readonly/>
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" id="pagada" th:field="*{pagada}" class="form-check-input"/>
+      <label class="form-check-label" for="pagada">Pagada</label>
+    </div>
+    <input type="hidden" id="repuestosData" value='[[${repuestos}]]' />
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+    </div>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
